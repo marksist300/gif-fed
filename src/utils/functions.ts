@@ -1,16 +1,5 @@
 import type { Ref } from "vue";
 
-export const connectWallet = async (walletAddress: Ref) => {
-  //@ts-ignore
-  const { solana } = window;
-  if (solana) {
-    const response = await solana.connect();
-    console.log("Connected with Public Key:", response.publicKey.toString());
-    walletAddress.value = response.publicKey.toString();
-    console.log(walletAddress);
-  }
-};
-
 export const checkIfWalletIsConnected = async (walletAddress: Ref) => {
   // We're using optional chaining (question mark) to check if the object is null
   //@ts-ignore

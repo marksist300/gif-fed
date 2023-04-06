@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import type { Ref } from "vue";
-import { connectWallet, checkIfWalletIsConnected } from "./utils/functions";
+import { checkIfWalletIsConnected } from "./utils/functions";
 import ConnectWallet from "./components/ConnectWallet.vue";
 import Grid from "./components/Grid.vue";
 
 const walletAddress = ref(null);
 const GifList: Ref<[] | string[]> = ref([]);
+
+const connectWallet = async () => {
+  //@ts-ignore
+  const { solana } = window;
+  if (solana) {
+    const response = await solana.connect();
+    console.log("Connected with Public Key:", response.publicKey.toString());
+    walletAddress.value = response.publicKey.toString();
+    console.log("walletAddress", walletAddress.value);
+  }
+};
 
 onMounted(() => {
   checkIfWalletIsConnected(walletAddress);
@@ -31,7 +42,7 @@ watch(walletAddress, () => {
     <p>View your GIF collection in the metaverse ✨</p>
     <ConnectWallet
       :wallet-address="walletAddress"
-      @ConnectEmit="connectWallet(walletAddress!)"
+      @ConnectEmit="connectWallet()"
       v-if="!walletAddress"
     />
     <Grid v-else :gif-list="GifList" />
