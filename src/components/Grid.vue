@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 const renders = [1, 2, 3, 4, 5, 6, 7];
-const props = defineProps(["gif-list"]);
+const { gifList } = defineProps(["gifList"]);
 const link = ref("");
 const handleSubmit = async () => {
   if (link.value.length > 0) {
@@ -25,11 +25,7 @@ const handleSubmit = async () => {
   </form>
 
   <section class="grid">
-    <img
-      v-for="elem in renders"
-      src="https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=200"
-      alt=""
-    />
+    <img v-for="elem of gifList" :src="elem" alt="" />
   </section>
 </template>
 

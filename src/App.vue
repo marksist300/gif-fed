@@ -31,7 +31,13 @@ watch(walletAddress, () => {
     // Call Solana program here.
 
     // Set state
-    GifList.value = ["hello", "one"];
+    GifList.value = [
+      "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=200",
+      "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=200",
+      "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=200",
+      "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=200",
+      "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=200",
+    ];
   }
 });
 </script>
@@ -45,7 +51,7 @@ watch(walletAddress, () => {
       @ConnectEmit="connectWallet()"
       v-if="!walletAddress"
     />
-    <Grid v-else :gif-list="GifList" />
+    <Grid v-else :gifList="GifList" />
   </main>
 </template>
 
